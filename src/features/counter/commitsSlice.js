@@ -2,8 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchCount } from "./counterAPI";
 
 const initialState = {
-    value: 0,
-    status: "idle",
     commitsData: [],
     isFavoriteFiltered: false,
 };
@@ -34,10 +32,14 @@ export const commitsSlice = createSlice({
             state.isFavoriteFiltered = !state.isFavoriteFiltered;
         },
         setFavoriteCommit: (state, action) => {
-            // state.commitsData.find(({sha}) => sha === action.payload)
-            console.log(
-                state.commitsData.find(({ sha }) => sha === action.payload)
-            );
+            state.commitsData = state.commitsData.map((item) => {
+                if (item.sha === action.payload) {
+                    const newItem = Object.assign({}, item);
+                    newItem.isFavorite = !newItem.isFavorite;
+                    return newItem;
+                }
+                return item;
+            });
         },
         deleteCommit: (state, action) => {
             console.log(action);

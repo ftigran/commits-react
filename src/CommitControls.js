@@ -5,7 +5,7 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
     setFavoriteCommit,
     deleteCommit,
@@ -24,7 +24,7 @@ const CommitControls = ({ sha, isFavorite }) => {
     return (
         <Grid container>
             <Checkbox
-                checked={isFavorite}
+                checked={!!isFavorite}
                 onClick={onFavoriteButtonClick}
                 icon={<FavoriteBorder />}
                 checkedIcon={<Favorite />}
