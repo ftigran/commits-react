@@ -3,11 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Header from "./Header";
-import { Counter } from "./features/counter/Counter";
-import {
-    setCommitsData,
-    selectCommitsData,
-} from "./features/counter/commitsSlice";
+import CommitsList from "./CommitsList";
+import { setCommitsData } from "./features/counter/commitsSlice";
 
 const AppContainer = styled(Grid)(({ theme }) => ({
     padding: 20,
@@ -16,8 +13,6 @@ const AppContainer = styled(Grid)(({ theme }) => ({
 function App() {
     const dispatch = useDispatch();
 
-    const commitsData = useSelector(selectCommitsData);
-    const [items, setItems] = useState([]);
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -28,7 +23,6 @@ function App() {
                 (commitsData) => {
                     dispatch(setCommitsData(commitsData));
                     setIsLoaded(true);
-                    // setItems(commits);
                 },
                 (error) => {
                     setIsLoaded(true);
@@ -50,6 +44,7 @@ function App() {
                             <Header error={error} isLoaded={isLoaded} />
                         </Grid>
                     </Grid>
+                    {!error && isLoaded && <CommitsList />}
                 </Grid>
             </Grid>
         </AppContainer>

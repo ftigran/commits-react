@@ -28,17 +28,22 @@ export const commitsSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         setCommitsData: (state, action) => {
-            console.log(action);
             state.commitsData = action.payload;
         },
         toggleIsFavoriteFiltered: (state) => {
-            console.log(state.isFavoriteFiltered);
             state.isFavoriteFiltered = !state.isFavoriteFiltered;
-            console.log(state.isFavoriteFiltered);
         },
-        // Use the PayloadAction type to declare the contents of `action.payload`
-        incrementByAmount: (state, action) => {
-            state.value += action.payload;
+        setFavoriteCommit: (state, action) => {
+            // state.commitsData.find(({sha}) => sha === action.payload)
+            console.log(
+                state.commitsData.find(({ sha }) => sha === action.payload)
+            );
+        },
+        deleteCommit: (state, action) => {
+            console.log(action);
+            state.commitsData = state.commitsData.filter(
+                ({ sha }) => sha !== action.payload
+            );
         },
     },
     // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -55,8 +60,12 @@ export const commitsSlice = createSlice({
     },
 });
 
-export const { setCommitsData, toggleIsFavoriteFiltered, incrementByAmount } =
-    commitsSlice.actions;
+export const {
+    setCommitsData,
+    toggleIsFavoriteFiltered,
+    setFavoriteCommit,
+    deleteCommit,
+} = commitsSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -64,14 +73,5 @@ export const { setCommitsData, toggleIsFavoriteFiltered, incrementByAmount } =
 export const selectCommitsData = (state) => state.commits.commitsData;
 export const selectIsFavoriteFiltered = (state) =>
     state.commits.isFavoriteFiltered;
-
-// We can also write thunks by hand, which may contain both sync and async logic.
-// Here's an example of conditionally dispatching actions based on current state.
-export const incrementIfOdd = (amount) => (dispatch, getState) => {
-    const currentValue = selectCommitsData(getState());
-    if (currentValue % 2 === 1) {
-        dispatch(incrementByAmount(amount));
-    }
-};
 
 export default commitsSlice.reducer;
