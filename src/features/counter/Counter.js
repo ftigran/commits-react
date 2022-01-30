@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   decrement,
@@ -16,8 +16,37 @@ export function Counter() {
   const [incrementAmount, setIncrementAmount] = useState('2');
 
   const incrementValue = Number(incrementAmount) || 0;
+  
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    fetch("https://api.github.com/repos/ftigran/gameSpy/commits")
+        .then((response) => response.json())
+        .then(
+            (commits) => {
+                setIsLoaded(true);
+                setItems(commits);
+            },
+            (error) => {
+                setIsLoaded(true);
+                setError(error);
+            }
+        );
+  }, []);
+  if (error) {
+    return <div>Ошибка: {error.message}</div>;
+  } else if (!isLoaded) {
+      return <div>Загрузка...</div>;
+  } else {
+    return (
+        <p>
+          {items.map((item) => (item?.committer?.login))}
 
-  return (
+        </p>
+      )
+    }
+return(
     <div>
       <div className={styles.row}>
         <button
