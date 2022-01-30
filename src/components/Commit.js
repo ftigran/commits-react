@@ -3,17 +3,10 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Avatar from "@mui/material/Avatar";
 
-import Checkbox from "@mui/material/Checkbox";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { styled } from "@mui/material/styles";
 
-import {
-    toggleIsFavoriteFiltered,
-    selectIsFavoriteFiltered,
-    selectCommitsData,
-} from "./features/counter/commitsSlice";
+import { toggleIsFavoriteFiltered } from "./commitsSlice";
 import CommitControls from "./CommitControls";
 
 const CommitWrapper = styled(Paper)(({ theme }) => ({

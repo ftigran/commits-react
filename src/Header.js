@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     toggleIsFavoriteFiltered,
     selectIsFavoriteFiltered,
-} from "./features/counter/commitsSlice";
+} from "./components/commitsSlice";
 
 const Title = ({ text }) => (
     <Grid component="h1" item>

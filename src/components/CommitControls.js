@@ -6,10 +6,7 @@ import Favorite from "@mui/icons-material/Favorite";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch } from "react-redux";
-import {
-    setFavoriteCommit,
-    deleteCommit,
-} from "./features/counter/commitsSlice";
+import { setFavoriteCommit, deleteCommit } from "./commitsSlice";
 
 const CommitControls = ({ sha, isFavorite }) => {
     const dispatch = useDispatch();

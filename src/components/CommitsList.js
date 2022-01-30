@@ -1,26 +1,12 @@
 import React from "react";
 import Grid from "@mui/material/Grid";
 import Commit from "./Commit";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
-import { useSelector, useDispatch } from "react-redux";
-import {
-    toggleIsFavoriteFiltered,
-    selectIsFavoriteFiltered,
-    selectCommitsData,
-} from "./features/counter/commitsSlice";
-
-const Title = ({ text }) => (
-    <Grid component="h1" item>
-        {text}
-    </Grid>
-);
+import { useSelector } from "react-redux";
+import { selectIsFavoriteFiltered, selectCommitsData } from "./commitsSlice";
 
 const CommitsList = () => {
     const isFavoriteFiltered = useSelector(selectIsFavoriteFiltered);
     const commitsData = useSelector(selectCommitsData);
-
-    const dispatch = useDispatch();
 
     if (commitsData.length === 0) {
         return (

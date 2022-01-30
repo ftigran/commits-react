@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
 import Header from "./Header";
-import CommitsList from "./CommitsList";
-import { setCommitsData } from "./features/counter/commitsSlice";
+import CommitsList from "./components/CommitsList";
+import { setCommitsData } from "./components/commitsSlice";
 
 const AppContainer = styled(Grid)(({ theme }) => ({
     padding: 20,
