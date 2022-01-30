@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import { styled } from "@mui/material/styles";
-
+import Header from "./Header";
 import { Counter } from "./features/counter/Counter";
 import {
     setCommitsData,
@@ -36,33 +36,24 @@ function App() {
                 }
             );
     }, []);
-    if (error) {
-        return <div>Ошибка: {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Загрузка...</div>;
-    } else {
-        return (
-            <AppContainer container justifyContent={"center"}>
-                <Grid item xs={12} md={10} xl={8}>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <Grid
-                                component={"header"}
-                                container
-                                justifyContent={"space-between"}
-                                alignItems={"center"}
-                            >
-                                <Grid item>
-                                    <h1>Коммиты:</h1>
-                                </Grid>
-                                <Grid item></Grid>
-                            </Grid>
+    return (
+        <AppContainer container justifyContent={"center"}>
+            <Grid item xs={12} md={10} xl={8}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Grid
+                            component={"header"}
+                            container
+                            justifyContent={"space-between"}
+                            alignItems={"center"}
+                        >
+                            <Header error={error} isLoaded={isLoaded} />
                         </Grid>
                     </Grid>
                 </Grid>
-            </AppContainer>
-        );
-    }
+            </Grid>
+        </AppContainer>
+    );
 }
 
 export default App;
