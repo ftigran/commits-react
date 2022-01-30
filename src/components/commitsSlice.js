@@ -27,7 +27,6 @@ export const commitsSlice = createSlice({
             });
         },
         deleteCommit: (state, action) => {
-            console.log(action);
             state.commitsData = state.commitsData.filter(
                 ({ sha }) => sha !== action.payload
             );
